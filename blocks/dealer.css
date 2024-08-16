@@ -1,0 +1,10 @@
+.dealer {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hand {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}

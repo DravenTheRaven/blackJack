@@ -1,6 +1,9 @@
-.dealer {
+.dealer,
+.player {
   margin-left: auto;
   margin-right: auto;
+  height: 500px;
+  width: 500px;
 }
 
 .hand {

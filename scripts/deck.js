@@ -35,6 +35,29 @@ class Player {
     this.hand = [];
     this.money = 500;
   }
+
+  getHandValue() {
+    let handValue = 0;
+    this.hand.forEach((card) => {
+      if (card[0] === "A") {
+        if (handValue + 11 > 21) {
+          handValue += 1;
+        } else {
+          handValue += 11;
+        }
+      } else if (
+        card[0] === "1" ||
+        card[0] === "J" ||
+        card[0] === "Q" ||
+        card[0] === "K"
+      ) {
+        handValue += 10;
+      } else {
+        handValue += Number(card[0]);
+      }
+    });
+    console.log(handValue);
+  }
 }
 
 class Dealer {
@@ -64,9 +87,20 @@ class Hand {
   }
 }
 
+const cardTemplate = document.querySelector("#card__template");
+
+const playerHandElement = document.querySelector(".player__hand");
+const dealerHandElement = document.querySelector(".dealer__hand");
 const deck = new Deck();
 const player = new Player();
 const dealer = new Dealer(player, deck);
 dealer.deal();
 
 console.log(player.hand);
+player.hand.forEach((card) => {
+  const templateClone = cardTemplate.content.cloneNode(true);
+  templateClone.querySelector(".card__name").textContent = card;
+  playerHandElement.append(templateClone);
+});
+
+player.getHandValue();

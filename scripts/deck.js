@@ -32,11 +32,14 @@ class Deck {
 
 class Player {
   constructor() {
+    this.name = "player";
     this.hand = [];
     this.money = 500;
   }
 
   getHandValue() {
+    //i anticipate some corner case issues with the aces
+    //need to flush out the algorithm
     let handValue = 0;
     this.hand.forEach((card) => {
       if (card[0] === "A") {
@@ -57,11 +60,13 @@ class Player {
       }
     });
     console.log(handValue);
+    return handValue;
   }
 }
 
 class Dealer {
   constructor(player, deck) {
+    this.name = "dealer";
     this.hand = [];
     this.player = player;
     this.deck = deck;
@@ -69,6 +74,7 @@ class Dealer {
 
   hit(hand) {
     hand.push(deck.deck.pop(0));
+    console.log(hand);
   }
 
   deal() {
@@ -88,6 +94,8 @@ class Hand {
 }
 
 const cardTemplate = document.querySelector("#card__template");
+const buttonTemplate = document.querySelector("#button__template");
+const buttonContainer = document.querySelector(".player__button_container");
 
 const playerHandElement = document.querySelector(".player__hand");
 const dealerHandElement = document.querySelector(".dealer__hand");
@@ -103,4 +111,14 @@ player.hand.forEach((card) => {
   playerHandElement.append(templateClone);
 });
 
-player.getHandValue();
+let playerHandValue = player.getHandValue();
+
+if (playerHandValue < 21) {
+  const buttonClone = buttonTemplate.content.cloneNode(true);
+  const button = buttonClone.querySelector(".player__button");
+  button.textContent = "Hit";
+  button.addEventListener("click", () => {
+    dealer.hit(player.hand);
+  });
+  buttonContainer.append(button);
+}

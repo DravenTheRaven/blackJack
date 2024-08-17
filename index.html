@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="pages/index.css" />
   </head>
-  <body>
+  <body class="table">
     <section class="dealer">
       <div class="hand dealer__hand">
         <div class="card dealer__card"></div>
@@ -15,12 +15,16 @@
     </section>
     <section class="player">
       <div class="hand player__hand"></div>
+      <div class="player__button_container"></div>
     </section>
     <template class="template" id="card__template"
       ><div class="card">
         <span class="card__name">Card</span>
       </div></template
     >
+    <template class="template" id="button__template">
+      <button class="player__button">stuff</button>
+    </template>
     <script src="scripts/deck.js"></script>
   </body>
 </html>
